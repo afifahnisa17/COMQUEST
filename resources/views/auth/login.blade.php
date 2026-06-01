@@ -5,167 +5,227 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | COMPQUEST</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}">
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet"> --}}
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
-    <!-- END GLOBAL MANDATORY STYLES -->
 
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <link href="{{ asset('assets/css/scrollspyNav.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('plugins/animate/animate.css') }}" rel="stylesheet" type="text/css" />
-    <script src="{{ asset('plugins/sweetalerts/promise-polyfill.js') }}"></script>
-    <link href="{{ asset('plugins/sweetalerts/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('plugins/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/components/custom-sweetalert.css') }}" rel="stylesheet" type="text/css" />
-    <!-- BEGIN PAGE LEVEL CUSTOM STYLES -->
-    <!-- Fonts & Bootstrap -->
+    <link rel="icon" href="{{ asset('assets/img/favicon.ico') }}">
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <link href="{{ asset('assets/css/partial/login.css') }}" rel="stylesheet">
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        * {
+            font-family: 'Urbanist', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4337F1, #1b1b3a);
+            overflow: hidden;
+        }
+
+        /* floating glow */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            top: -120px;
+            left: -120px;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            bottom: -120px;
+            right: -120px;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(25px); }
+        }
+
+        /* LOGIN CARD */
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            color: white;
+            z-index: 2;
+        }
+
+        .login-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 12px;
+            border: none;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .btn-login {
+            background: #fff;
+            color: #4337F1;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 12px;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .error-text {
+            font-size: 12px;
+            color: #ffb4b4;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="login-wrapper">
-        <div class="login-card">
-            <h3 class="fw-bold text-center mb-4">COMPQUEST</h3>
+<div class="login-card">
 
-            <form action="{{ url('login') }}" method="POST" id="form-login">
-                @csrf
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" id="username" class="form-control shadow-sm"
-                        placeholder="Masukkan Username Anda">
-                </div>
+    <h3 class="login-title">COMPQUEST</h3>
 
-                <div class="mb-2">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" class="form-control shadow-sm"
-                        placeholder="Masukkan Password Anda">
-                </div>
+    <form id="form-login" action="{{ url('login') }}" method="POST">
+        @csrf
 
-                {{-- <div class="d-flex justify-content-end mb-4">
-                    <a class="text-link" href="#">Lupa Password</a>
-                </div> --}}
-
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-login">Login</button>
-                </div>
-            </form>
+        <!-- Username -->
+        <div class="mb-3">
+            <label>Username</label>
+            <input type="text" id="username" class="form-control" placeholder="Enter username">
+            <div class="error-text d-none" id="err-username"></div>
         </div>
-    </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- SweetAlert Library -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Password -->
+        <div class="mb-3">
+            <label>Password</label>
+            <input type="password" id="password" class="form-control" placeholder="Enter password">
+            <div class="error-text d-none" id="err-password"></div>
+        </div>
 
-    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
-    <script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+        <button type="submit" class="btn btn-login w-100" id="btn-login">
+            Login
+        </button>
+    </form>
 
-    <script>
-        $(document).ready(function() {
-            App.init();
-        });
-    </script>
-    <script src="{{ asset('plugins/highlight/highlight.pack.js') }}"></script>
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <!-- END GLOBAL MANDATORY SCRIPTS -->
+</div>
 
-    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
-    <script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
-    <script src="{{ asset('assets/js/forms/bootstrap_validation/bs_validation_script.js') }}"></script>
-    <script src="{{ asset('plugins/sweetalerts/sweetalert2.min.js') }}"></script>
-    <script src="{{ asset('plugins/sweetalerts/custom-sweetalert.js') }}"></script>
-    <!--  END CUSTOM SCRIPTS FILE  -->
-    <script>
-        // Tambahkan meta csrf-token di head jika belum ada
-        if ($('meta[name="csrf-token"]').length === 0) {
-            $('head').append('<meta name="csrf-token" content="{{ csrf_token() }}">');
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+$(document).ready(function () {
+
+    const showError = (id, msg) => {
+        $(`#${id}`).removeClass('d-none').text(msg);
+    };
+
+    const clearErrors = () => {
+        $('.error-text').addClass('d-none').text('');
+    };
+
+    $('#form-login').on('submit', function (e) {
+        e.preventDefault();
+
+        clearErrors();
+
+        let username = $('#username').val().trim();
+        let password = $('#password').val().trim();
+        let valid = true;
+
+        // validation
+        if (username.length < 4 || username.length > 20) {
+            showError('err-username', 'Username must be 4–20 characters');
+            valid = false;
         }
 
-        // Setup CSRF token untuk AJAX
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        if (password.length < 5 || password.length > 20) {
+            showError('err-password', 'Password must be 5–20 characters');
+            valid = false;
+        }
+
+        if (!valid) return;
+
+        // loading state
+        let btn = $('#btn-login');
+        btn.prop('disabled', true).text('Logging in...');
+
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: {
+                username,
+                password,
+                _token: $('input[name="_token"]').val()
+            },
+            success: function (res) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Success',
+                    text: res.message
+                }).then(() => {
+                    window.location.replace(res.redirect);
+                });
+            },
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: 'Invalid username or password'
+                });
+            },
+            complete: function () {
+                btn.prop('disabled', false).text('Login');
             }
         });
 
-        // Validasi dan submit form login
-        $(document).ready(function() {
-            $('#form-login').on('submit', function(e) {
-                e.preventDefault();
+    });
 
-                // Hapus error sebelumnya
-                $('.invalid-feedback').remove();
-                $('.is-invalid').removeClass('is-invalid');
+});
+</script>
 
-                let username = $('#username').val().trim();
-                let password = $('#password').val().trim();
-                let valid = true;
-
-                // Validasi username
-                if (username.length < 6 || username.length > 10) {
-                    $('#username').addClass('is-invalid')
-                        .after(
-                            '<span class="invalid-feedback d-block">Username harus 4-20 karakter.</span>');
-                    valid = false;
-                }
-
-                // Validasi password
-                if (password.length < 5 || password.length > 16) {
-                    $('#password').addClass('is-invalid')
-                        .after(
-                            '<span class="invalid-feedback d-block">Password harus 5-20 karakter.</span>');
-                    valid = false;
-                }
-
-                if (!valid) return;
-
-                // AJAX login
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'POST',
-                    data: {
-                        username: username,
-                        password: password,
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        if (response.status) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Berhasil',
-                                text: response.message,
-                            }).then(function() {
-                                window.location = response.redirect;
-                            });
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Terjadi Kesalahan',
-                                text: response.message
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Terjadi Kesalahan',
-                            text: 'Username atau password salah.'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 </body>
-
 </html>
