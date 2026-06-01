@@ -16,129 +16,254 @@
         * {
             font-family: 'Urbanist', sans-serif !important;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f6f7fb;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #4337F1, #1a1a3d);
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .hero::before {
+            top: -120px;
+            left: -120px;
+        }
+
+        .hero::after {
+            bottom: -120px;
+            right: -120px;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(25px); }
+        }
+
+        /* CARD */
+        .modern-card {
+            border: none;
+            border-radius: 16px;
+            transition: 0.3s ease;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        /* REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* BUTTON */
+        .btn-modern {
+            border-radius: 12px;
+            padding: 12px 24px;
+        }
+
+        /* SECTION TITLE */
+        .section-title {
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
     </style>
 
     @stack('styles')
 </head>
-<body class="bg-light">
 
-    <!-- Topbar General -->
-    @include('layout.topbar-general')
+<body>
 
-    <!-- Content -->
-     <!-- Halaman Awal -->
-    <section id="beranda" class="d-flex align-items-center justify-content-center text-center bg-white" style="min-height: 100vh;">
-        <div class="container">
-            <h1 class="fw-bold display-4 text-dark">Selamat Datang di <span class="text-custom" style="color: #4337F1;">COMPQUEST</span></h1>
-            <p class="lead text-secondary">Empower Your Vision. Drive Your Success</p>
+@include('layout.topbar-general')
 
-        </div>
-    </section>
-
-    <!-- Tentang -->
-   <section id="tentang" class="d-flex align-items-center justify-content-center text-start bg-light" style="min-height: 100vh; padding: 3rem 1rem;">
-    <div class="container">
-        <h1 class="fw-bold display-4 mb-4 text-dark">
-        Tentang <span class="text-custom" style="color: #4337F1;">COMPQUEST</span>
-        </h1>
-        <p class="lead text-secondary mb-4" style="max-width: 700px; line-height: 1.6;">
-        COMPQUEST adalah platform inovatif yang membantu Anda mewujudkan visi dan mencapai kesuksesan.
-        Kami berkomitmen memberikan solusi terbaik untuk kebutuhan Anda dengan teknologi terkini dan pendekatan yang tepat sasaran.<br><br>
-        Didukung oleh <strong>JTI Polinema</strong>, kami siap menjadi partner andalan Anda.
+<!-- HERO -->
+<section class="hero">
+    <div class="container reveal">
+        <h1 class="display-3 fw-bold">COMPQUEST</h1>
+        <p class="lead mt-3" style="opacity:0.85;">
+            Empower Your Vision. Drive Your Success.
         </p>
-    </div>
-  </section>
 
-  <!-- Prestasi Mahasiswa -->
-   <section id="prestasi" class="d-flex align-items-center justify-content-center text-start bg-white" style="min-height: 100vh; padding: 3rem 1rem;">
-    <div class="container">
-            <h2 class="mb-4 text-center text-dark fw-bold">Leaderboard Mahasiswa Berprestasi</h2>
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="text-center" style="width: 60px;">#</th>
-                            <th>Nama Mahasiswa</th>
-                            <th class="text-center" style="width: 80px;">Poin</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/img/90x90.jpg" class="rounded-circle me-3 border border-dark mr-4" width="40" height="40" alt="avatar">
-                                    <span>Shaun</span>
-                                </div>
-                            </td>
-                            <td class="text-center">640</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">2</td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/img/90x90.jpg" class="rounded-circle me-3 border border-dark mr-4" width="40" height="40" alt="avatar">
-                                    <span>Sheep</span>
-                                </div>
-                            </td>
-                            <td class="text-center">320</td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">3</td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <img src="assets/img/90x90.jpg" class="rounded-circle me-3 border border-dark mr-4" width="40" height="40" alt="avatar">
-                                    <span>Timmy</span>
-                                </div>
-                            </td>
-                            <td class="text-center">160</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <a href="#tentang" class="btn btn-light btn-lg btn-modern mt-3">
+            Explore Platform
+        </a>
+    </div>
+</section>
+
+<!-- TENTANG -->
+<section id="tentang" class="py-5">
+    <div class="container reveal text-center">
+
+        <h2 class="section-title">
+            Tentang <span style="color:#4337F1;">COMPQUEST</span>
+        </h2>
+
+        <p class="text-secondary mx-auto mb-5" style="max-width:750px;">
+            COMPQUEST adalah platform kompetisi digital untuk mahasiswa Jurusan Teknologi Informasi dalam berinovasi dan berkembang.
+        </p>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="p-4 bg-white modern-card">
+                    🚀
+                    <h5 class="mt-2">Growth</h5>
+                    <p class="text-secondary">Upgrade skill lebih cepat</p>
+                </div>
             </div>
-    </section>
 
+            <div class="col-md-4">
+                <div class="p-4 bg-white modern-card">
+                    💡
+                    <h5 class="mt-2">Innovation</h5>
+                    <p class="text-secondary">Ide kreatif tanpa batas</p>
+                </div>
+            </div>
 
+            <div class="col-md-4">
+                <div class="p-4 bg-white modern-card">
+                    🤝
+                    <h5 class="mt-2">Collaboration</h5>
+                    <p class="text-secondary">Networking mahasiswa</p>
+                </div>
+            </div>
 
-    <!-- FAQ Section -->
-    <section id="faq" class="py-5 bg-white">
-    <div class="container">
-        <h2 class="mb-5 text-start text-dark fw-bold">FAQ</h2>
-
-        <div class="mb-4">
-        <h5 class="fw-semibold text-dark">Apa itu COMPQUEST?</h5>
-        <p class="text-secondary" style="max-width: 800px;">
-            COMPQUEST adalah platform kompetisi digital yang dirancang untuk mewadahi mahasiswa dalam berinovasi, bersaing, dan mengembangkan kemampuan mereka di bidang teknologi.
-        </p>
-        </div>
-
-        <div class="mb-4">
-        <h5 class="fw-semibold text-dark">Siapa saja yang bisa ikut serta?</h5>
-        <p class="text-secondary" style="max-width: 800px;">
-            Semua mahasiswa aktif dari berbagai jurusan dan perguruan tinggi di Indonesia dapat ikut serta dalam kompetisi yang tersedia di COMPQUEST.
-        </p>
-        </div>
-
-        <div class="mb-4">
-        <h5 class="fw-semibold text-dark">Apakah mengikuti kompetisi dikenakan biaya?</h5>
-        <p class="text-secondary" style="max-width: 800px;">
-            Umumnya gratis, tetapi beberapa kompetisi mungkin memerlukan biaya pendaftaran yang akan diinformasikan di halaman detail masing-masing lomba.
-        </p>
         </div>
     </div>
-    </section>
+</section>
 
-    @include('layout.footer')
+<!-- LEADERBOARD -->
+<section id="prestasi" class="py-5 bg-white">
+    <div class="container reveal">
 
+        <h2 class="section-title">Leaderboard Mahasiswa</h2>
 
-    <!-- Scripts -->
-    <script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/active-section.js') }}"></script>
+        <div class="row g-4 justify-content-center">
 
+            <div class="col-md-4">
+                <div class="card modern-card text-center p-4">
+                    <div style="font-size:40px;">🥇</div>
+                    <img src="assets/img/90x90.jpg" class="rounded-circle mx-auto my-3" width="80">
+                    <h5>Shaun</h5>
+                    <p class="text-secondary">640 Points</p>
+                </div>
+            </div>
 
-    @stack('scripts')
+            <div class="col-md-4">
+                <div class="card modern-card text-center p-4">
+                    <div style="font-size:40px;">🥈</div>
+                    <img src="assets/img/90x90.jpg" class="rounded-circle mx-auto my-3" width="80">
+                    <h5>Sheep</h5>
+                    <p class="text-secondary">320 Points</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card modern-card text-center p-4">
+                    <div style="font-size:40px;">🥉</div>
+                    <h5 class="mt-3">Timmy</h5>
+                    <p class="text-secondary">160 Points</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="py-5">
+    <div class="container reveal">
+
+        <h2 class="section-title text-start">FAQ</h2>
+
+        <div class="accordion" id="faqAcc">
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#q1">
+                        Apa itu COMPQUEST?
+                    </button>
+                </h2>
+                <div id="q1" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        COMPQUEST adalah platform kompetisi digital mahasiswa.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">
+                        Siapa yang bisa ikut?
+                    </button>
+                </h2>
+                <div id="q2" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        Semua mahasiswa aktif di Indonesia.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+@include('layout.footer')
+
+<!-- SCRIPT -->
+<script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+
+<script>
+    const reveals = document.querySelectorAll('.reveal');
+
+    function revealOnScroll() {
+        reveals.forEach(el => {
+            const top = el.getBoundingClientRect().top;
+            if (top < window.innerHeight - 100) {
+                el.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+</script>
+
 </body>
-
 </html>
