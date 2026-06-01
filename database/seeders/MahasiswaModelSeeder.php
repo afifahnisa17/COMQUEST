@@ -19,9 +19,9 @@ class MahasiswaModelSeeder extends Seeder
                 'id_prodi' => 1,
                 'id_periode' => 1,
                 'username' => 'MHS001',
-                'nama' => 'SATRIA PANGESTU ADILAMSYAH',
+                'nama' => 'ARJUNA PRATAMA',
                 'nim' => '2241720140',
-                'password' => bcrypt('12345'),
+                'password' => bcrypt('mahasiswa123'),
                 'foto' => 'profil_cowok1.jpg',
             ],
             [
@@ -31,7 +31,7 @@ class MahasiswaModelSeeder extends Seeder
                 'username' => 'MHS002',
                 'nama' => 'DEWI LESTARI',
                 'nim' => '2241720141',
-                'password' => bcrypt('12345'),
+                'password' => bcrypt('mahasiswa123'),
                 'foto' => 'profil_cewek1.jpg',
             ],
             [
@@ -41,7 +41,7 @@ class MahasiswaModelSeeder extends Seeder
                 'username' => 'MHS003',
                 'nama' => 'DAVID SEPTIAN',
                 'nim' => '2241720142',
-                'password' => bcrypt('12345'),
+                'password' => bcrypt('mahasiswa123'),
                 'foto' => 'profil_cowok2.jpg',
             ],
             [
@@ -51,7 +51,7 @@ class MahasiswaModelSeeder extends Seeder
                 'username' => 'MHS004',
                 'nama' => 'EKO PRABOWO',
                 'nim' => '2241720143',
-                'password' => bcrypt('12345'),
+                'password' => bcrypt('mahasiswa123'),
                 'foto' => 'profil_cowok1.jpg',
             ],
             [
@@ -61,7 +61,7 @@ class MahasiswaModelSeeder extends Seeder
                 'username' => 'MHS005',
                 'nama' => 'FUFUNIA',
                 'nim' => '2241720144',
-                'password' => bcrypt('12345'),
+                'password' => bcrypt('mahasiswa123'),
                 'foto' => 'profil_cowok2.jpg',
             ],
         ];
